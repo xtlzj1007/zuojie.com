@@ -24,6 +24,13 @@ func createList(){
 	printList(header)
 }
 
+func createInHeader(h *Teacher,name string,age int)(*Teacher){
+	p := &Teacher{}
+	p.Age = age
+	p.Name = name 
+	p.Next = h 
+	return p 
+}
 
 func printList(h *Teacher){
 	for h!= nil{
@@ -32,6 +39,15 @@ func printList(h *Teacher){
 	}
 }
 
-func main(){
-	createList()
+func TestCreateInHeader(){
+	var header * Teacher
+	header = createInHeader(header,"a",12)
+	header = createInHeader(header,"b",20)
+	printList(header)
 }
+
+func main(){
+	// createList()
+	TestCreateInHeader()
+}
+
