@@ -290,6 +290,7 @@ var map1 map[keytype]valuetype
 a = make(map[string]string,10)
 
 
+//day5 
 
 
 
