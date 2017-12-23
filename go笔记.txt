@@ -292,6 +292,37 @@ a = make(map[string]string,10)
 
 //day5 
 
+链表 ：每个节点包含下一个节点的地址，这样把所有的节点都串起来。
+通常把第一个节点叫做链表头.
+
+// 使用结构体来创建一个类
+
+type People struct{
+    Age int
+    Name string
+}
+
+// Student 中包含People类的地址
+type Student struct{
+    Age int
+    Name string 
+    Next *People
+    
+}
+
+
+func testList(){
+    var s Student
+    s.Age = 10
+    s.Name = "abc"
+    s.Next = &People{
+        Age:12,
+        Name:"def"
+    }
+    fmt.Printf("s:%+v\n",s)
+}
+
+
 
 
 
