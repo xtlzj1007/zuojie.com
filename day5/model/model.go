@@ -11,3 +11,4 @@ func NewSchool(name,addr string) *School{
 		Addr:addr,
 	}
 }
+

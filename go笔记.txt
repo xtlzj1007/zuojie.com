@@ -323,8 +323,14 @@ func testList(){
 }
 
 
+// 工厂模式
 // make 是用来分配引用类型的
-// new 是用来创建子类型
+map slice channel 
+// new 是用分配值类型的
+
+tag 可一个给每一个struct字段起一个tag
+这个tag可以通过反射的机制来获取数据。
+
 
 
 
