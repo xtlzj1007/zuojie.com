@@ -20,19 +20,22 @@ func (i *Int)Add(a,b int) { //方法
 	return  
 }
 
+
 func TestInt(){
 	var a Int
     a.Add(100,200)	
 	fmt.Println(a)
 }
 
-func (s *Student) Set(name string,age int){
+func (s *Student) Set(name string,age int){ //给类型添加方法
 	s.Name = name
 	s.Age = age 
 }
 
 func main(){
 	var s Student
-	s.Set("zuojie",27)
-	fmt.Println(s)
+	s.Set("zj",23)
+	fmt.Println(s)	
 }
+
+

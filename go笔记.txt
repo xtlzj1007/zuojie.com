@@ -331,6 +331,18 @@ map slice channel
 tag 可一个给每一个struct字段起一个tag
 这个tag可以通过反射的机制来获取数据。
 
+// go语言中方法非常特殊
+
+func (s *Student) Set(name string,age int){
+	s.Name = name
+	s.Age = age 
+}
+
+func main(){
+	var s Student
+	s.Set("zuojie",27)
+	fmt.Println(s)
+}
 
 
 
