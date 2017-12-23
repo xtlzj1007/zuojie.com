@@ -22,4 +22,12 @@ func main(){
 		return
 	}
 	fmt.Printf("%s\n",data)
+	var s1 Student
+	err = json.Unmarshal(data,&s1) //反序列化
+	if err != nil{
+		fmt.Printf("json Unmarshal failed,err:%v",err)
+		return
+	}
+	fmt.Printf("s1:%#v\n",s1)
+
 }
