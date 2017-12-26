@@ -66,6 +66,25 @@ func BookInput(){
 	library = append(library,NewBook(name,author,pub_date,count))
 }
 
+//书名查找
+func SelectBookName(){
+	var book_name string
+	fmt.Println("请输入书名：")
+	fmt.Scanln(&book_name)
+	for _,book := range library{
+		if book_name == book.Name{
+			fmt.Printf("书名:%s 作者:%s 出版时间:%s 数量:%d\n",book.Name,book.Author,book.Publish_Date,book.Count)
+		}
+	}
+}
+
+//查找所有书
+func SelectBookAll(){
+	for _,book := range library{
+		fmt.Printf("书名:%s 作者:%s 出版时间:%s 数量:%d\n",book.Name,book.Author,book.Publish_Date,book.Count)
+	}
+}
+
 //书籍查询
 func SelectBook(){
 	//输出所有书籍信息
@@ -75,19 +94,9 @@ func SelectBook(){
 		fmt.Scanln(&sel)
 		switch sel{
 			case 1:
-				for _,book := range library{
-					fmt.Printf("书名:%s 作者:%s 出版时间:%s 数量:%d",book.Name,book.Author,book.Publish_Date,book.Count)
-				}
-			case 2:{
-				var book_name string
-				fmt.Println("请输入书名：")
-				fmt.Scanln(&book_name)
-				for _,book := range library{
-					if book_name == book.Name{
-						fmt.Printf("书名:%s 作者:%s 出版时间:%s 数量:%d",book.Name,book.Author,book.Publish_Date,book.Count)
-					}
-				}
-			}
+				SelectBookAll()
+			case 2:
+				SelectBookName()
 			default:
 				fmt.Println("您的输入有误！")	
 		}
@@ -98,21 +107,47 @@ func SelectBook(){
 
 //学生信息录入
 func StudentInput(){
+	var (
+	name string
+	class string
+	id string
+	gender string
+	books []*Book
+	)
+	// library = make([]*Book,1000)  
+	fmt.Println("输入姓名：")
+	fmt.Scanln(&name)
+	fmt.Println("输入性别：")
+	fmt.Scanln(&gender)
+	fmt.Println("输入班级：")
+	fmt.Scanln(&class)
+	fmt.Println("输入身份证：")
+	fmt.Scanln(&id)
+	// fmt.Println(name,author,pub_date,count)
+	school = append(school,NewStudent(id,name,class,gender,books))
+}
+
+//按身份证查找学生
+
+
+
+//借书管理
+func BookManage(){
 
 }
 
 func menu(){
 	for {
 		fmt.Println(`
-		欢迎使用图书管理系统
-			1.书籍录入
-			2.书籍查询
-			3.学生管理
-			4.借书管理
-			5.书籍状态
-			6.我的借阅
-			7.退出系统
-			请选择输入编号：
+欢迎使用图书管理系统
+	1.书籍录入
+	2.书籍查询
+	3.学生管理
+	4.借书管理
+	5.书籍状态
+	6.我的借阅
+	7.退出系统
+请选择输入编号：
 			`)
 		var num int
 		fmt.Scanln(&num)
@@ -127,8 +162,8 @@ func menu(){
 			fmt.Println("学生管理")
 			StudentInput()
 		case 4:
-			fmt.Println("书籍管理")
-			// BookManage()
+			fmt.Println("借书管理")
+			BookManage()
 		case 5:
 			fmt.Println("书籍状态")
 			//BookStatus()
@@ -136,7 +171,8 @@ func menu(){
 			fmt.Println("我的借阅")
 			//MyBorrow()
 		case 7:
-			// fmt.Println(library)
+			fmt.Println(library)
+			fmt.Println(school)
 			os.Exit(0)
 		default:
 			fmt.Println("输入无效！")
