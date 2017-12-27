@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var person={
+            username:'zj',
+            age:12,
+            salary:1234.56,
+            addr:"北京",
+            sex:"男"
+        }
+        document.write("用户名:"+person["username"]+"<br>"+"性别:"+person.sex+"<br>")
+    function PersonInfo(name,age,sex){
+        this.name = name;
+        this.age = age;
+        this.sex = sex
+    }
+
+    var person1 = new PersonInfo('zz',25,'男');
+    document.write(person1.name+person1["sex"]+"<br>")
+    var obj = {} ;//空对象
+    obj.username = 'zj';
+    obj.age = 23;
+    obj.addr = '北京';
+    obj['test'] = 'this is a test';
+    document.write(obj.username+"<br>"+obj.age)
+    //删除属性
+    delete obj.test;
+    // for in 循环属性
+    
+    </script>
+</body>
+</html>
