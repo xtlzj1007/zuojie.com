@@ -8,32 +8,65 @@
 </head>
 <body>
     <script>
-        var person={
-            username:'zj',
-            age:12,
-            salary:1234.56,
-            addr:"北京",
-            sex:"男"
-        }
-        document.write("用户名:"+person["username"]+"<br>"+"性别:"+person.sex+"<br>")
-    function PersonInfo(name,age,sex){
-        this.name = name;
-        this.age = age;
-        this.sex = sex
-    }
+    //     var person={
+    //         username:'zj',
+    //         age:12,
+    //         salary:1234.56,
+    //         addr:"北京",
+    //         sex:"男"
+    //     }
+    //     document.write("用户名:"+person["username"]+"<br>"+"性别:"+person.sex+"<br>")
+    // function PersonInfo(name,age,sex){
+    //     this.name = name;
+    //     this.age = age;
+    //     this.sex = sex
+    // }
 
-    var person1 = new PersonInfo('zz',25,'男');
-    document.write(person1.name+person1["sex"]+"<br>")
-    var obj = {} ;//空对象
-    obj.username = 'zj';
-    obj.age = 23;
-    obj.addr = '北京';
-    obj['test'] = 'this is a test';
-    document.write(obj.username+"<br>"+obj.age)
-    //删除属性
-    delete obj.test;
-    // for in 循环属性
-    
+    // var person1 = new PersonInfo('zz',25,'男');
+    // document.write(person1.name+person1["sex"]+"<br>")
+    // var obj = {} ;//空对象
+    // obj.username = 'zj';
+    // obj.age = 23;
+    // obj.addr = '北京';
+    // obj['test'] = 'this is a test';
+    // document.write(obj.username+"<br>"+obj.age)
+    // //删除属性
+    // delete obj.test;
+    // // for in 循环属性
+    // var obj1 ={
+    //     x:1,
+    //     y:2,
+    //     test:"this is test",
+    //     edu:"bwxy"
+    // };
+    // for(var i  in obj1){
+    //   document.write(i+obj1[i]+"<br>")  
+    // }
+
+    // var obj2 = {
+    //     username :"zj",
+    //     age : 33,
+    //     addr:"北京",
+    //     sayHi:function(){
+    //         return 'say Hi';
+    //     },
+    //     info:function(){
+    //         return '用户名：'+this.username+'\n'+'年龄：'+this.age+'\n'+'地址：'+this.addr
+    //     }
+    // }
+    // console.log(obj2.sayHi())
+    // console.log(obj2.info())
+    function foo(){};
+    foo.prototype.z=3;
+    var obj = new foo();
+    obj.x = 1;
+    obj.y = 2;
+    //通过in检测对象上是否有某个属性
+    console.log('y' in obj);
+    console.log('z' in obj);
+    console.log('toString' in obj);
+    //hasOwnProperty
+    console.log(obj.hasOwnProperty("x"));
     </script>
 </body>
 </html>
