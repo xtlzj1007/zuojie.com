@@ -11,9 +11,11 @@ type Student struct{
 	Age int     `json:"age"`
 	Sex string  `json:"sex"`
 }
+
 // func Add(a,b int) int{   //函数
 // 	return a + b
 // }
+
 func (i *Int)Add(a,b int) { //方法
 	// return a + b
 	*i = Int(a+b) //给对象本身赋值

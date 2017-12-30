@@ -7,23 +7,25 @@ import (
 
 //定义书籍类
 type Book struct{
-	Name string
-	Count int
-	Author string
-	Publish_Date string
+	Name string          `json:"name"`
+	Count int   		 `json:"count"`
+	Author string		 `json:"author"`
+	Publish_Date string  `json:"pub_date"`
 }
 
 //定义学生类
 type Student struct{
-	Name string
-	Class string
-	ID string
-	Gender string
-	Books []*Book
+	Name string          `json:"name"`
+	Class string         `json:"class"`
+	ID string            `json:"id"`
+	Gender string        `json:"gender"`
+	Books []*Book        `json:"books"`
 }
 
-var library []*Book //全局变量，图书馆，存放书籍的切片
-var school []*Student //全局变量，学校，存放学生的切片
+//全局变量，图书馆，存放书籍的切片
+var library []*Book
+//全局变量，学校，存放学生的切片 
+var school []*Student
 
 //书籍的构造方法
 func NewBook(name,author,pub_date string,count int) *Book{
@@ -67,15 +69,16 @@ func BookInput(){
 }
 
 //书名查找
-func SelectBookName(){
+func SelectBookName() (int,*Book){
 	var book_name string
 	fmt.Println("请输入书名：")
 	fmt.Scanln(&book_name)
-	for _,book := range library{
+	for index,book := range library{
 		if book_name == book.Name{
-			fmt.Printf("书名:%s 作者:%s 出版时间:%s 数量:%d\n",book.Name,book.Author,book.Publish_Date,book.Count)
+			return index,book
 		}
 	}
+	return -1,nil
 }
 
 //查找所有书
@@ -96,7 +99,12 @@ func SelectBook(){
 			case 1:
 				SelectBookAll()
 			case 2:
-				SelectBookName()
+				_,book := SelectBookName()
+				if book != nil{
+					fmt.Printf("书名:%s 作者:%s 出版时间:%s 数量:%d\n",book.Name,book.Author,book.Publish_Date,book.Count)
+				}else{
+					fmt.Println("您查询的书籍不存在！")
+				}
 			default:
 				fmt.Println("您的输入有误！")	
 		}
@@ -128,12 +136,45 @@ func StudentInput(){
 }
 
 //按身份证查找学生
-
-
+func SelectStudentId() *Student{
+	var id string
+	fmt.Println("请输入学生ID：")
+	fmt.Scanln(&id)
+	for _,stu := range school{
+		if id == stu.ID {
+			// fmt.Println(stu.ID,stu.Name,stu.Class,stu.Gender,stu.Books)
+			return stu
+		}
+	}
+	return nil
+}
 
 //借书管理
 func BookManage(){
+	stu := SelectStudentId()
+	if stu != nil{
+		index,book := SelectBookName()
+		if book != nil && index != -1 {
+			stu.Books = append(stu.Books,book)
+			fmt.Println(stu)
+		}else{
+			fmt.Println("书籍不存在！")
+		}
+	}
+}
 
+// 书籍状态
+func BookStatus(){
+	index,book := SelectBookName()
+	fmt.Printf("%d,%v",index,book)
+}
+
+// 我的借阅
+func MyBorrow(){
+	stu := SelectStudentId()
+	for _,book := range stu.Books{
+		fmt.Printf("%s",book.Name)
+	}
 }
 
 func menu(){
@@ -166,10 +207,10 @@ func menu(){
 			BookManage()
 		case 5:
 			fmt.Println("书籍状态")
-			//BookStatus()
+			BookStatus()
 		case 6:
 			fmt.Println("我的借阅")
-			//MyBorrow()
+			MyBorrow()
 		case 7:
 			fmt.Println(library)
 			fmt.Println(school)
@@ -183,4 +224,4 @@ func menu(){
 func main(){
 	menu()
 	// fmt.Println(library)
-}
+ }
