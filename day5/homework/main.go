@@ -75,10 +75,11 @@ func SelectBookName() (int,*Book){
 	fmt.Scanln(&book_name)
 	for index,book := range library{
 		if book_name == book.Name{
+			//找到返回下标和书籍对象
 			return index,book
 		}
 	}
-	return -1,nil
+	return -1,nil //没有找到返回-1,nil
 }
 
 // 查找所有书
