@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+	"os"
 	"fmt"
 	"encoding/json"
 )
@@ -13,7 +15,7 @@ type Book struct{
 	Price float32    `json:"price"`
 }
 
-func main(){
+func Json_demo(){
 	var gobook Book
 	gobook.Title = "Go语言编程"
 	gobook.Authors = []string{"XuShiwei", "HughLv", "Pandaman", "GuaguaSong", "HanTuo"}
@@ -33,4 +35,29 @@ func main(){
 	if err == nil{
 		fmt.Println(r)
 	}
+}
+
+func Json_demo2(){
+	dec := json.NewDecoder(os.Stdin)
+	enc := json.NewEncoder(os.Stdout)
+	for {
+		var v map[string]interface{}
+		if err := dec.Decode(&v); err != nil {
+			log.Println(err)
+			return
+		}
+		for k := range v {
+		if k != "Title" {
+			v[k] = false
+			}
+		}
+		if err := enc.Encode(&v); err != nil {	
+		log.Println(err)
+		}
+	}
+}
+
+func main(){
+	// Json_demo()
+	Json_demo2()
 }

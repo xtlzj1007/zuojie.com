@@ -68,7 +68,7 @@ func BookInput(){
 	library = append(library,NewBook(name,author,pub_date,count))
 }
 
-//书名查找
+// 书名查找
 func SelectBookName() (int,*Book){
 	var book_name string
 	fmt.Println("请输入书名：")
@@ -81,16 +81,16 @@ func SelectBookName() (int,*Book){
 	return -1,nil
 }
 
-//查找所有书
+// 查找所有书
 func SelectBookAll(){
 	for _,book := range library{
 		fmt.Printf("书名:%s 作者:%s 出版时间:%s 数量:%d\n",book.Name,book.Author,book.Publish_Date,book.Count)
 	}
 }
 
-//书籍查询
+// 书籍查询
 func SelectBook(){
-	//输出所有书籍信息
+	// 输出所有书籍信息
 	if library != nil{
 		var sel int
 		fmt.Println("选择1显示所有书籍信息，选择2条件查询")
@@ -113,7 +113,7 @@ func SelectBook(){
 	}
 }
 
-//学生信息录入
+// 学生信息录入
 func StudentInput(){
 	var (
 	name string
