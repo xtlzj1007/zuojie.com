@@ -346,7 +346,27 @@ func main(){
 
 
 
+day6 接口
+
+interface 类型可以定义一组方法，用来表示对象的行为特征。
+不能包含任何变量。（没有自己的实例，行为规范）
+
+定义接口 
+type Animal interface{
+    Talk(参数列表) 返回值
+    Eat(参数列表) 返回值
+}
+
+ 接口引用类型，需要初始化
+
+ http://sanyuesha.com/2017/07/22/how-to-understand-go-interface/
 
 
+a.interface不需要显示实现，只要一个对象实现了一个接口中的所有方法，则实现了这个接口。
 
+b.一个对象实现多个interface
+
+多态
+
+一种事物的多种形态，都可以按照统一的接口来操作。
 
