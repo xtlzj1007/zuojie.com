@@ -19,6 +19,10 @@ func (p *Phone) OpenAilPay(){
 	p.PayMap["ali_pay"] = aliPay
 } 
 
+// func (p *Phone) OpenPay(name string,money float32) (err error) {
+
+// }
+
 func (p *Phone) PayMoney(name string,money float32) (err error){
 	pay,ok := p.PayMap[name]
 	if !ok {
