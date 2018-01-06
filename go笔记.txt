@@ -382,5 +382,14 @@ switch t:=  arealntf.(type){
 }
 
 
+反射：在运行时获取变量的相关信息
+import("reflect")
+
+
+系统reflect包
+TypeOf获取变量类型
+ValueOf获取变量值
+
+
 
 
