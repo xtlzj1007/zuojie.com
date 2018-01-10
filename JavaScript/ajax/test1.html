@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=sc, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function doAjax(the_request){
+            var reques = null;
+            if (window.XMLHttpRequest){
+                reques = new XMLHttpRequest();
+            }else if(window.ActiveXObject){
+                reques = new.ActiveXObject("Microsoft.XMLHTTP");
+            }else{
+                alert("您的浏览器不支持Ajax!")
+                return false
+            }
+            return true
+        }
+    </script>
+</body>
+</html>

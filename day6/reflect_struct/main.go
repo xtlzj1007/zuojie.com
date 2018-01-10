@@ -30,25 +30,25 @@ func testStruct(){
 
 	fieldNum := valueinfo.Elem().NumField()
 	fmt.Println("field name:",fieldNum)
-	sexValueInfo := valueinfo.Elem().FieldByName("make")
-	fmt.Println("sex=",sexValueInfo.Int())
-	sexValueInfo.SetInt(100)
-	fmt.Println(stu)
+	// sexValueInfo := valueinfo.Elem().FieldByName("Name")
+	// fmt.Println("sex=",sexValueInfo.Int())
+	// sexValueInfo.SetInt(100)
+	// fmt.Println(stu)
 
-	setMethod := valueinfo.MethodByName("Set")
-	fmt.Println(setMethod)
+	// setMethod := valueinfo.MethodByName("Set")
+	// fmt.Println(setMethod)
 
-	var params []reflect.Value
-	name := "Tom"
-	age := 1000
-	sex := 2332
+	// var params []reflect.Value
+	// name := "Tom"
+	// age := 1000
+	// sex := 2332
 
-	params = append(params,reflect.ValueOf(name))
-	params = append(params,reflect.ValueOf(age))
-	params = append(params,reflect.ValueOf(sex))
+	// params = append(params,reflect.ValueOf(name))
+	// params = append(params,reflect.ValueOf(age))
+	// params = append(params,reflect.ValueOf(sex))
 
-	setMethod.Call(params)
-	fmt.Println(stu)
+	// setMethod.Call(params)
+	// fmt.Println(stu)
 
 }
 
