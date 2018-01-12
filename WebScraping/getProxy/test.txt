@@ -1,0 +1,2 @@
+//*[@id="ip_list"]/tbody/tr[70]/td[2]
+//*[@id="ip_list"]/tbody/tr[72]/td[2]
