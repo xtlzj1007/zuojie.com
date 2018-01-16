@@ -1,0 +1,395 @@
+Go程序结构
+1)go 按照package进行组织 
+2)go 中只有一个main函数
+
+go语言特性
+
+1.垃圾回收
+a.内存自动回收，不需要开发人员管理内容
+b.开发人员专注业务
+c.只需要new分配内存，不需要释放
+d.函数丰富的内置类型
+e.错误处理
+f.匿名函数和闭包
+
+
+2.天然并发
+a.从语言层面支持并发，非常简单
+b.goroutine,轻量级线程，创建成千上万goroute成为可能
+c.基于CSP(Communicating Sequential Process) 模型实现，管道。
+
+
+func calc(){
+	// 大量计算
+}
+
+
+func main(){
+	go calc() // 使用go关键字启动线程
+}
+
+
+# go 中只有管道的概念
+3. channel
+a.管道，类似于pipe 
+b.多个goroute之间通过channel进行通信
+c.支持任何类型
+
+
+func main(){
+	pipe := make(chan int,3) // 创建管道
+	pipe <- 1 // 将1存入管道
+	pipe <- 2 
+
+	var a int 
+	a = <- pip // 将管道中的数据取出来
+}
+
+
+4. 返回值
+a.一个函数返回多个值
+
+func calc(a int,b int)(int,int){
+	sum := a+b 
+	avg := (a+b)/2
+	return sum,avg
+}
+
+包的概念
+1.考虑多人协助
+2.和python一样，把相同功能的代码放到一个文件中
+3.包可以被其他包引用
+4.main包是用来生成可执行文件，每个程序只有一个main包
+5.包的主要用途是提高代码的可复用性
+6.go 特别适合做微服务。
+	1)把每个模块做成一个服务。
+	2)rpc接口
+	3)敏捷开发
+	4)容器云
+
+匿名函数
+f := func(x,y int) int {
+	return x + y
+}
+
+1. “|”或操作
+2. “&”与操作
+3. “^”相同为0，不同为1异或（先或再非）
+
+一、设置其中一个为1
+用1左移n位与目标数做或操作
+
+二、判断某一位是否等于1
+用1左移n与目标做&操作
+
+三、清除其中一位
+用1左移n与目标做^操作
+
+四、大写字母的函数式公有函数，小写字母是私有函数
+
+五、_调用某个包的,但不引用包的任何东西，但可以初始化
+初始化，最先执行,在main函数执行之前。
+
+六、常量const 只读
+类型只能是boolean,number,string
+
+const (
+    a = iota //从0开始,之后递增
+    b
+    c
+)
+
+
+七、数组与切片
+定义数组：
+array := [5]int{1,2,3,4,5}
+定义切片：
+mySlice := array[:3]
+直接创建切片
+mySlice := make([]int,5,10) //前一个是数量，后一个是动态分配大小
+
+
+7.2基于数组切片创建数组切片
+数组切片也可以基于另一个数组切片来创建
+
+7.3 内容复制
+slice1 := [] int{1,2,3,4,5}
+slice2 := [] int{5,4,3}
+
+copy(slice2,slice1) // 只会复制slice1的前3个元素到slice2中
+copy(slice1,slice2) // 只会复制slice2的3个元素到slice1中
+
+八、map是一堆键值对的未排序集合。
+
+8.1声明变量
+map的声明基本上没有多余的元素。
+var myMap map[string] Personinfo
+
+8.2创建
+使用Go语言的内置的函数make()创建一个新的map。
+myMap = make(map[string] PersonInfo,数据量)
+
+8.3声明并创建
+myMap = map[string] PersonInfo{
+    "1234":PersonInfo{"1","Jack","Room 101,..."}
+}
+
+8.4元素赋值
+myMap["1234"] = PersonInfo{"1","Jack","Room 101,...."}
+
+8.5元素删除
+delete(myMap,"1234")
+
+8.6元素查找
+1.声明并初始化一个变量为空;
+2.试图从map中获取相应键的值到该变量中;
+3.判断变量是否依旧为空，如果为空则表示map中没有包含该变量。
+value ,ok := myMap["1234"]
+if ok {
+    //找到了
+    //处理找到的value
+}
+
+选择语句
+switch i {
+    case 0:
+        fmt.Printf("0")
+    case 1:
+        fmt.Printf("1")
+    case 2:
+        fmt.Printf("2")
+    case 4,5,6:
+        fmt.Printf("4,5,6")
+    default:
+        fmt.Printf("Default")
+}
+
+
+9.匿名函数
+
+Go语言中函数可以像普通函数一样被传递和使用。
+匿名函数是由一个不带函数名的函数声明和函数体组成。
+
+func(a,b int, z float64) bool{
+    return a*b < int(z)
+}
+
+可以直接赋值给一个变量或者直接执行:
+f := func(x,y int) int{
+    return x+y}
+}
+
+func (ch chan int){
+    ch <- ACK
+}(reply_chan) // 花括号后直接跟参数列表表示函数调用
+
+
+10.闭包
+Go的匿名函数是一个闭包
+基本概念
+    闭包是可以包含自由变量的代码块，这些变量不在这个代码块内或者任何
+全局上下文定义,而是在定义代码块的环境定义。
+闭包的价值
+    闭包的价值在可以作为函数对象或者匿名函数，对于类型系统而言。
+Go语言中的闭包
+    Go语言中的闭包同样也会引用到函数外的变量。
+
+11.error接口
+Go 语言引入了一个关于错误处理的标准模式，即error接口
+type error interface{
+    Error() string
+}
+
+func Foo(param int)(n int,err error){
+    //
+}
+
+代用时的代码建议使用错误处理
+n,err := Foo(0)
+
+if err != nil {
+    // 错误处理
+}else{
+    // 使用返回值n
+}
+
+
+切片取后3位长度减三
+
+// 切片是引用类型的。切片中的数据都是引用（指向）数组中数据的地址
+var b[] int = [] int{1,2,3,4,5}
+
+数组是值类型的
+
+如果一个变量中存在是地址，他就是指针
+
+数组是一个连续的空间
+
+
+切片只能通过make来创建
+make([] type,len,cap)
+
+var b [] int
+
+b = make([] int,5,10)
+
+切片的底层还是一个数组
+
+数组的长度是cap容量
+切片的长度是len
+
+
+// copy 和 append操作
+
+// 数组（切片）... 将数组解包
+
+
+// 字符串底层是个切片
+
+// string,byte以及rune之间的区别？
+string 是字符串
+byte 是数组切片类型
+rune 是utf8类型的切片
+
+//函数定义
+func add (a,b,c,d int){
+
+
+}
+
+//不支持重载，一个包里面不能有两个名字一样的函数
+
+//函数也是一种类型，一个函数可以赋值给其他变量
+
+//函数的参数传递方式：
+// 1)值传递
+// 2)引用传递
+
+注意：无论是值传递，还是引用传递，传递函数的都是变量的副本，
+不过，值传递是值的拷贝。引用传递是地址的拷贝，一般来说，地址拷贝最为高效
+
+//函数的传递方式
+map,slice,chan,指针,interface默认是引用的方式传递
+
+defer //函数中最后执行，先进后出
+
+应用场景 //释放锁，关闭文件，关闭数据库
+
+递归
+
+//闭包:一个函数和与其相关的引用环境组合而成的实体l
+
+
+//sort包排序
+
+
+//map key-value的数据结构
+1.声明
+var map1 map[keytype]valuetype
+2.初始化
+a = make(map[string]string,10)
+
+
+//day5 
+
+链表 ：每个节点包含下一个节点的地址，这样把所有的节点都串起来。
+通常把第一个节点叫做链表头.
+
+// 使用结构体来创建一个类
+
+type People struct{
+    Age int
+    Name string
+}
+
+// Student 中包含People类的地址
+type Student struct{
+    Age int
+    Name string 
+    Next *People
+    
+}
+
+
+func testList(){
+    var s Student
+    s.Age = 10
+    s.Name = "abc"
+    s.Next = &People{
+        Age:12,
+        Name:"def"
+    }
+    fmt.Printf("s:%+v\n",s)
+}
+
+
+// 工厂模式
+// make 是用来分配引用类型的
+map slice channel 
+// new 是用分配值类型的
+
+tag 可一个给每一个struct字段起一个tag
+这个tag可以通过反射的机制来获取数据。
+
+// go语言中方法非常特殊
+
+func (s *Student) Set(name string,age int){
+	s.Name = name
+	s.Age = age 
+}
+
+func main(){
+	var s Student
+	s.Set("zuojie",27)
+	fmt.Println(s)
+}
+
+
+
+day6 接口
+
+interface 类型可以定义一组方法，用来表示对象的行为特征。
+不能包含任何变量。（没有自己的实例，行为规范）
+
+定义接口 
+type Animal interface{
+    Talk(参数列表) 返回值
+    Eat(参数列表) 返回值
+}
+
+ 接口引用类型，需要初始化
+
+ http://sanyuesha.com/2017/07/22/how-to-understand-go-interface/
+
+
+a.interface不需要显示实现，只要一个对象实现了一个接口中的所有方法，则实现了这个接口。
+
+b.一个对象实现多个interface
+
+多态
+
+一种事物的多种形态，都可以按照统一的接口来操作。
+实现统一的管理。用一个接口可以控制多个类当中相同的方法。
+
+空接口 interface {}
+ 
+
+类型断言 type switch
+所有类型都可以实现空接口。xtlzj1007
+
+switch t:=  arealntf.(type){
+
+}
+
+
+反射：在运行时获取变量的相关信息
+import("reflect")
+
+
+系统reflect包
+TypeOf获取变量类型
+ValueOf获取变量值
+
+
+
+
